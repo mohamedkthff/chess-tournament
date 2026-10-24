@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anir chess | tournoi d'echecs</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero">
+    <nav class="navbar">
+        <a class="logo" href="#">♟ Anir chess</a>
+        <span class="status">● Tournoi en présentiel</span>
+    </nav>
+
+    <div class="hero-content">
+        <p class="eyebrow">STRATÉGIE · PASSION · PERFORMANCE</p>
+        <h1>Anir <span>chess</span></h1>
+        <p>Gérez vos joueurs, vos rondes et vos résultats au même endroit.</p>
+        <a class="hero-button" href="#joueurs">Gérer le tournoi ↓</a>
+    </div>
+</header>
+
+<main class="container">
+
+    <section class="stats">
+        <article class="stat-card">
+            <span>♟</span>
+            <p>Joueurs inscrits</p>
+            <strong id="totalJoueurs">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>▦</span>
+            <p>Rondes créées</p>
+            <strong id="totalRondes">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>✓</span>
+            <p>Matchs terminés</p>
+            <strong id="totalMatchs">0</strong>
+        </article>
+        <article class="stat-card">
+            <span>🏆</span>
+            <p>Leader actuel</p>
+            <strong id="leader">—</strong>
+        </article>
+    </section>
+
+    <section class="panel" id="joueurs">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">PARTICIPANTS</p>
+                <h2>Gestion des joueurs</h2>
+            </div>
+            <span class="pill">Inscriptions</span>
+        </div>
+
+        <form id="formJoueur" class="player-form">
+            <input id="nomJoueur" type="text"
+                   placeholder="Nom complet du joueur" maxlength="60" required>
+            <button class="btn btn-gold" type="submit">+ Ajouter</button>
+        </form>
+
+        <div class="toolbar">
+            <input id="recherche" type="search"
+                   placeholder="🔎 Rechercher un joueur...">
+            <span id="compteurJoueurs">0 joueur</span>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Joueur</th>
+                        <th>Points</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="listeJoueurs"></tbody>
+            </table>
+        </div>
+
+        <p class="hint">
+            Conseil : ajoutez tous les participants avant de créer la première ronde.
+        </p>
+    </section>
+
+    <section class="panel" id="rondes">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">COMPÉTITION</p>
+                <h2>Rondes et matchs</h2>
+            </div>
+            <button id="btnRonde" class="btn btn-green">
+                + Créer une ronde
+            </button>
+        </div>
+
+        <p class="hint">
+            Les joueurs sont associés automatiquement en essayant d'éviter
+            les rencontres déjà jouées. Les résultats se saisissent après chaque match.
+        </p>
+
+        <div id="listeRondes">
+            <div class="empty-state">
+                <span>♟</span>
+                <p>Aucune ronde pour le moment.</p>
+                <small>Ajoutez au moins deux joueurs pour commencer.</small>
+            </div>
+        </div>
+    </section>
+
+    <section class="panel" id="classement">
+        <div class="section-heading">
+            <div>
+                <p class="eyebrow">RÉSULTATS</p>
+                <h2>Classement général</h2>
+            </div>
+            <button id="btnExport" class="btn btn-outline">
+                ↓ Exporter CSV
+            </button>
+        </div>
+
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Rang</th>
+                        <th>Joueur</th>
+                        <th>Points</th>
+                        <th>Matchs joués</th>
+                        <th>Victoires</th>
+                        <th>Buchholz</th>
+                    </tr>
+                </thead>
+                <tbody id="tableClassement"></tbody>
+            </table>
+        </div>
+        <p class="hint">
+            En cas d'égalité de points, le Buchholz sert de départage :
+            c'est la somme des points des adversaires rencontrés.
+        </p>
+    </section>
+
+    <section class="panel info-panel">
+        <p class="eyebrow">INFORMATIONS</p>
+        <h2>Règles du tournoi</h2>
+        <div class="rules-grid">
+            <div><strong>1 point</strong><span>Pour une victoire</span></div>
+            <div><strong>0,5 point</strong><span>Pour un match nul</span></div>
+            <div><strong>0 point</strong><span>Pour une défaite</span></div>
+            <div><strong>Bye</strong><span>1 point si le nombre de joueurs est impair</span></div>
+        </div>
+        <p class="hint">
+            Les appariements proposés sont une version simplifiée du système suisse,
+            et non une certification officielle de tournoi.
+        </p>
+    </section>
+
+<section class="panel">
+    <h2>🔐 Espace professeur</h2>
+
+    <form id="loginForm">
+        <label for="emailProf">Email</label>
+        <input
+            type="email"
+            id="emailProf"
+            placeholder="Email du professeur"
+            required
+        >
+
+        <label for="passwordProf">Mot de passe</label>
+        <input
+            type="password"
+            id="passwordProf"
+            placeholder="Mot de passe"
+            required
+        >
+
+        <button type="submit" class="btn">
+            Se connecter
+        </button>
+    </form>
+
+    <button id="logoutBtn" class="btn" hidden>
+        Se déconnecter
+    </button>
+
+    <p id="loginMessage" class="hint"></p>
+</section>
+    <section class="panel settings-panel">
+        <h2>⚙️ Paramètres et sauvegarde</h2>
+        <p class="hint">
+            Les données sont conservées dans le stockage local de ce navigateur.
+            Exportez régulièrement les résultats pour garder une copie.
+        </p>
+        <button id="btnReset" class="btn btn-danger">
+            Réinitialiser le tournoi
+        </button>
+    </section>
+
+</main>
+
+<footer>
+    <p>♟ CHESS CLUB — Bonne chance à tous les joueurs !</p>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="script.js"></script>
+</body>
+</html>
